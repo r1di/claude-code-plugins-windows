@@ -1,0 +1,57 @@
+{
+  "name": "buildatscale-claude-code-windows",
+  "owner": {
+    "name": "r1di (Fork)",
+    "email": "ridvan.ereng@gmail.com"
+  },
+  "metadata": {
+    "description": "Windows-compatible fork of BuildAtScale Claude Code plugins - commands, hooks, and skills with Node.js-based hooks for Windows compatibility",
+    "version": "1.1.0-windows",
+    "homepage": "https://github.com/r1di/claude-code-plugins-windows",
+    "original": "https://github.com/buildatscale-tv/claude-code-plugins"
+  },
+  "plugins": [
+    {
+      "name": "buildatscale",
+      "description": "Core BuildAtScale tools: commit and PR commands, git safety hooks (Node.js based for Windows), and file cleanup automation",
+      "source": "./plugins/buildatscale",
+      "commands": [
+        "./commands/pr.md",
+        "./commands/commit.md",
+        "./commands/ceo.md"
+      ],
+      "hooks": {
+        "PreToolUse": [
+          {
+            "matcher": "Bash",
+            "hooks": [
+              {
+                "type": "command",
+                "command": "${CLAUDE_PLUGIN_ROOT}/hooks/block-force-git.sh"
+              }
+            ]
+          }
+        ],
+        "PostToolUse": [
+          {
+            "matcher": "Write|Edit|MultiEdit",
+            "hooks": [
+              {
+                "type": "command",
+                "command": "${CLAUDE_PLUGIN_ROOT}/hooks/file-write-cleanup.sh"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "nano-banana-pro",
+      "description": "Nano Banana Pro image generation (Windows compatible). Use when user asks to generate an image, create an image, make an image, or mentions nano banana. Uses Google Gemini 2.5 Flash.",
+      "source": "./plugins/nano-banana-pro",
+      "skills": [
+        "./skills/generate"
+      ]
+    }
+  ]
+}
