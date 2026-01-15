@@ -2,6 +2,21 @@
 
 > **Windows-compatible fork** of [buildatscale-tv/claude-code-plugins](https://github.com/buildatscale-tv/claude-code-plugins)
 
+## 🎨 Includes Nano Banana Pro - AI Image Generation
+
+Generate images directly in Claude Code using **Google Gemini** models:
+- **Flash model** - Fast generation (1024px)
+- **Pro model** - Professional quality (up to 4K)
+
+```bash
+# Example: Generate a hero image
+uv run "${SKILL_DIR}/scripts/image.py" --prompt "Modern tech landing page hero" --output "./hero.png"
+```
+
+---
+
+## 🐛 Windows Fix
+
 This fork resolves the Windows compatibility issue where bash hooks fail with:
 ```
 Error: Could not fork child process: There are no available terminals (-1).
